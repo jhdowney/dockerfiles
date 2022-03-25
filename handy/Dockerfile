@@ -149,7 +149,7 @@ ENV PATH /usr/share/dotnet:$PATH
 RUN apt update \ 
     && apt install -y --no-install-recommends \
         curl \ 
-    powershell_version=7.2.1 \
+    && powershell_version=7.2.1 \
     && curl -fSL --output PowerShell.Linux.arm64.$powershell_version.nupkg https://pwshtool.blob.core.windows.net/tool/$powershell_version/PowerShell.Linux.arm64.$powershell_version.nupkg \
     && powershell_sha512='63466595980109d812463ce59cdd8c24fa62559e7aa868dde01732fe500d34a4e7d239c99397de490b4dd9e21f1abc944274216cbcb38f423886827530d555d7' \
     && echo "$powershell_sha512  PowerShell.Linux.arm64.$powershell_version.nupkg" | sha512sum -c - \
@@ -167,4 +167,9 @@ RUN apt update \
 # reinstall curl
 RUN apt update \ 
     && apt install -y --no-install-recommends \
-        curl \ 
+        curl 
+
+# install grpcurl
+RUN /usr/local/go/bin/go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest \
+    && echo 'export PATH=$PATH:$HOME/go/bin' >> ~/.bashrc
+
