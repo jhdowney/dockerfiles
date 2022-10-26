@@ -34,7 +34,7 @@ RUN echo 'source $HOME/.cargo/env' >> $HOME/.bashrc
 
 # java corretto
 
-ARG version=11.0.14.9-1
+ARG version=11.0.17.8-1
 # In addition to installing the Amazon corretto, we also install
 # fontconfig. The folks who manage the docker hub's
 # official image library have found that font management
@@ -91,12 +91,12 @@ RUN apt update \
 RUN apt update \ 
     && apt install -y --no-install-recommends \
         curl \ 
-    && curl --remote-name --location https://go.dev/dl/go1.17.8.linux-arm64.tar.gz \
-    && tar -zxvf go1.17.8.linux-arm64.tar.gz -C /usr/local/ \
+    && curl --remote-name --location https://go.dev/dl/go1.19.2.linux-arm64.tar.gz \
+    && tar -zxvf go1.19.2.linux-arm64.tar.gz -C /usr/local/ \
     && echo 'export PATH=/usr/local/go/bin:${PATH}' | tee /etc/profile.d/go.sh \
     && . /etc/profile.d/go.sh \
     && echo 'export PATH=/usr/local/go/bin:${PATH}' >> $HOME/.bashrc \
-    && rm go1.17.8.linux-arm64.tar.gz \
+    && rm go1.19.2.linux-arm64.tar.gz \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
          curl
 
